@@ -1,0 +1,180 @@
+* {
+  box-sizing: border-box;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100%;
+  width: 100%;
+  background: linear-gradient(135deg, rgba(12, 29, 64, 0.7), rgba(31, 58, 117, 0.7)), url("../fondo.jpg");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #111;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+body.home-page {
+  background-image: linear-gradient(135deg, rgba(12, 29, 64, 0.9), rgba(31, 58, 117, 0.9)), url("../fondo.jpg");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+body.stats-page {
+  background-image: linear-gradient(135deg, rgba(12, 29, 64, 0.85), rgba(31, 58, 117, 0.85)), url("../fondo.jpg");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.contenedor {
+  max-width: 1200px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.25);
+  padding: 30px;
+}
+
+.jugadores-page {
+  padding: 24px;
+}
+
+header h1 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 2.25rem;
+}
+
+header p {
+  margin: 0 0 24px;
+  color: #444;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.player-card {
+  background-image: url("../fondo.jpg");
+  background-size: cover;
+  background-position: center;
+  border: 1px solid #dde3ef;
+  border-radius: 14px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+}
+
+.player-card h2 {
+  margin: 0 0 8px;
+  font-size: 1.35rem;
+  color: #16234f;
+}
+
+.player-card .position,
+.player-card .team {
+  margin: 4px 0;
+  font-weight: 700;
+  color: #5d6b92;
+}
+
+.player-card p:nth-child(4),
+.player-card p:nth-child(5) {
+  color: white;
+}
+
+.player-card p:last-child {
+  margin-top: 12px;
+  line-height: 1.6;
+  color: #444;
+}
+
+.player-card a {
+  display: inline-block;
+  margin-top: 12px;
+  color: #ff4d4d;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.player-card a:hover {
+  text-decoration: underline;
+}
+
+.boton-redireccion,
+.back-link {
+  display: inline-block;
+  margin-top: 24px;
+  background-color: #ff4d4d;
+  color: #fff;
+  padding: 12px 24px;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.boton-redireccion:hover,
+.back-link:hover {
+  background-color: #e03a3a;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  body {
+    align-items: stretch;
+    padding: 12px;
+  }
+
+  .contenedor {
+    padding: 20px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.stats-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 1.1rem;
+}
+
+.stats-table th, .stats-table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: left;
+}
+
+.stats-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.stats-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.stats-table tr:hover {
+  background-color: #f1f1f1;
+}

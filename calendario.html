@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Calendario de Partidos - Minnesota Timberwolves</title>
+ <link rel="stylesheet" href="style.css">
+ <link href='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css' rel='stylesheet' />
+ <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+</head>
+<body>
+ <div class="contenedor">
+  <h1>Calendario de Partidos - Minnesota Timberwolves Temporada 2025-2026</h1>
+  <a href="pagina.index.html" class="boton-redireccion">Volver a la Página Principal</a>
+  <div id="calendar"></div>
+ </div>
+
+ <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      initialView: 'dayGridMonth',
+      events: function(fetchInfo, successCallback, failureCallback) {
+        fetch('https://data.nba.net/prod/v1/2025/schedule.json')
+          .then(response => response.json())
+          .then(data => {
+            const teamId = '1610612750'; // Minnesota Timberwolves
+            const games = data.league.standard.filter(game => game.hTeam.teamId === teamId || game.vTeam.teamId === teamId);
+            var events = games.map(game => {
+              var date = new Date(game.startTimeUTC);
+              var isHome = game.hTeam.teamId === teamId;
+              var opponent = isHome ? game.vTeam.fullName : game.hTeam.fullName;
+              var title = isHome ? 'vs ' + opponent : 'en ' + opponent;
+              var status = game.statusNum === 3 ? 'Finalizado' : 'Pendiente';
+              if (status === 'Finalizado') {
+                title += ' ' + game.hTeam.score + '-' + game.vTeam.score;
+              }
+              var color = status === 'Finalizado' ? '#dc3545' : '#28a745'; // Red for played, green for pending
+              return {
+                title: title + ' (' + status + ')',
+                start: date.toISOString().split('T')[0],
+                color: color
+              };
+            });
+            successCallback(events);
+          })
+          .catch(error => {
+            console.error('Error fetching games:', error);
+            failureCallback(error);
+          });
+      }
+    });
+    calendar.render();
+  });
+ </script>
+</body>
+</html>
